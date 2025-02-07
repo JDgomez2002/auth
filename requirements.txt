@@ -1,0 +1,6 @@
+Flask==3.1.0
+Flask_Cors==5.0.0
+Flask_RESTful==0.3.10
+PyJWT==2.10.1
+PyJWT==2.10.1
+python-dotenv==1.0.1
