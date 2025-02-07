@@ -32,7 +32,7 @@ cd <PROJECT_FOLDER>
 ```
 2. Instala las dependencias:
 ```
-pip install
+pip install -r requirements.txt
 ```
 
 ejecuta el siguiente comando para poder correr la api
@@ -62,6 +62,6 @@ curl -X POST "http://localhost:8080/realms/CybersecurityRealm/protocol/openid-co
 - Daniel Gomez - 21429
 - Adrian Rodriguez - 21691
 - Samuel Chamalé - 21881
-- Diego Alonzo - 21
+- Diego Alonzo - 20172
 
 
