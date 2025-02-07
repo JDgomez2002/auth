@@ -14,10 +14,14 @@ CORS(app)
 
 load_dotenv()
 
-# Keycloak public key wrapped in PEM format
 KEYCLOAK_PUBLIC_KEY = os.getenv('KEYCLOAK_PUBLIC_KEY')
 
 def require_token(f):
+    """
+    Decorator that validates JWT tokens from Keycloak.
+    Checks Authorization header, verifies token signature and stores decoded token in g.user.
+    Returns 401 if token is missing, malformed or invalid.
+    """
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
@@ -47,21 +51,32 @@ def require_token(f):
     return decorated
 
 def get_db():
+    """
+    Executes a Neo4j query to get first 5 person names.
+    Returns JSON string of results.
+    """
     results = conn.query("MATCH (p:Person) RETURN p.name LIMIT 5")
     return json.dumps(results)
 
 @app.route('/public', methods=['GET'])
 def home():
+    """Public endpoint that returns a welcome message."""
     return "Hello, World!"
 
 @app.route('/private', methods=['GET'])
 @require_token
 def info():
+    """Protected endpoint that requires valid JWT token."""
     return "Private"
 
 @app.route('/data', methods=['POST'])
 @require_token
 def data():
+    """
+    Protected endpoint that accepts JSON data.
+    Validates required fields (name, email).
+    Returns 415 if not JSON, 400 if missing fields, 200 if successful.
+    """
     # Check if the request has JSON content
     if not request.is_json:
         return {"error": "Content type must be application/json"}, 415
