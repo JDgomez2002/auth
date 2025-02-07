@@ -3,6 +3,7 @@ from flask import Flask, g, request, send_from_directory, abort, jsonify
 from flask_cors import CORS
 from flask_restful import Resource, reqparse
 from functools import wraps
+from dotenv import load_dotenv
 import os
 import json
 import jwt
@@ -11,10 +12,10 @@ from jwt  import InvalidTokenError
 app = Flask(__name__)
 CORS(app)
 
+load_dotenv()
+
 # Keycloak public key wrapped in PEM format
-KEYCLOAK_PUBLIC_KEY = """-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtyWmujPiaWSjJlBj4px7maSZHCn2kuhz9S02GBj516rQhEGsKjMEVF4VZNST6aS8zjVkrtxKXbS9T3DA8hwZxFxrIR7GZCEG0Z1utWm3CFoFOPMu4E3OffjQKneYmvjYZyuYc7YKw7vWTC+EM3nZCJ9f0rLZGVmd11LrIPcVQ17d2vnwxVQzJLgYNgT1gO7AypV3ayPIwW8T6iHtWUeug9qMnUMTkodzFV0hYWAegoL5eNHJ/dqDC2JO0Y358NYjfvijFSUCc+dDclw/WPK5BhzHSAwr1kx7+feC13Jur8XCisOiJnYY4AgVLvpjgH+yHQi1s3acO0qx9yWQiPzuWwIDAQAB
------END PUBLIC KEY-----"""
+KEYCLOAK_PUBLIC_KEY = os.getenv('KEYCLOAK_PUBLIC_KEY')
 
 def require_token(f):
     @wraps(f)
