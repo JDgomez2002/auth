@@ -1,6 +1,14 @@
 # Flask API con Autenticación Keycloak
 Este ejercicio es una API construida con Flask que utiliza Keycloak para autenticación mediante tokens JWT.
 
+## Miembros 
+- Abner Garcia - 21285
+- Esteban Donis - 21610
+- Daniel Gomez - 21429
+- Adrian Rodriguez - 21691
+- Samuel Chamalé - 21881
+- Diego Alonzo - 20172
+
 ## Requisitos Previos
 Antes de ejecutar este ejercicio, asegúrate de tener instalado:
 - Python 3.x
@@ -56,12 +64,5 @@ curl -X POST "http://localhost:8080/realms/CybersecurityRealm/protocol/openid-co
 - GET /private: Ruta protegida, requiere token válido.
 - POST /data: Ruta protegida para enviar datos JSON.
 
-## Miembros 
-- Abner Garcia - 21285
-- Esteban Donis - 21610
-- Daniel Gomez - 21429
-- Adrian Rodriguez - 21691
-- Samuel Chamalé - 21881
-- Diego Alonzo - 20172
 
 
